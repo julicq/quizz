@@ -1,4 +1,7 @@
-[[questions]]
+[general]
+label = "General questions"
+
+[[general.questions]]
 
 question = "What was Meta Platforms Inc formerly known as"
 answers = ["Facebook"]
@@ -11,25 +14,25 @@ explanation = """
     information technology companies, alongside Alphabet, Amazon, Apple, and Microsoft.
 """
 
-[[questions]]
+[[general.questions]]
 
 question = "Which English city is known as the Steel City"
 answers = ["Sheffield"]
 alternatives = ["London", "Manchester", "Liverpool"]
 
-[[questions]]
+[[general.questions]]
 
 question = "Which former British colony was given back to China in 1997"
 answers = ["Hong Kong"]
 alternatives = ["Shanghai", "Beijing", "Wuhan"]
 
-[[questions]]
+[[general.questions]]
 
 question = "The logo for luxury car maker Porsche features which animal"
 answers = ["Horse"]
 alternatives = ["Goat", "Eagle", "Snake"]
 
-[[questions]]
+[[general.questions]]
 
 question = "Which element is said to keep bones strong"
 answer = ["Calcium"]
@@ -41,9 +44,24 @@ explanation = """
     the oxalate is less.
 """
 
-[[questions]]
+[[general.questions]]
 
 question = "What elements water consists of"
 answers = ["Helium", "Oxygen"]
 alternatives = ["Chromium", "Titanium", "Calcium"]
 hint = "Water formula is H20"
+
+[movies]
+label = "Movies"
+
+[[movies.questions]]
+question = "Who directed 'Pulp Fiction'"
+answers = ["Quentin Tarantino"]
+alternatives = ["Stiven Spielbeg", "Martin Scorsese", "Christopher Nolan"]
+hint = "This director also shot 'Reservoir Dogs' and 'Kill Bill'"
+
+[[movies.questions]]
+question = "What is the Russian boxer Rocky fights in Rocky IV called"
+answers = ["Ivan Drago"]
+alternatives = ["Boris Ivanov", "Sergei Petukhov", "Foma Kiniaev"]
+hint = "Dolph Lundgren played him"

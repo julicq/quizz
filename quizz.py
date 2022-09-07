@@ -9,7 +9,7 @@ except ModuleNotFoundError:
 NUM_QUESTIONS_PER_QUIZ = 5
 QUESTIONS_PATH = pathlib.Path(__file__).parent / "questions.toml"
 
-def run_quiz():
+def run_quizz():
     questions = prepare_questions(
         QUESTIONS_PATH, num_questions=NUM_QUESTIONS_PER_QUIZ
     )
@@ -22,7 +22,16 @@ def run_quiz():
     print(f"\nYou got {num_correct} correct out of {num} questions")
 
 def prepare_questions(path, num_questions):
-    questions = tomllib.loads(path.read_text())["questions"]
+    topic_info = tomllib.loads(path.read_text())
+    topics = {
+        topic["label"]: topic["questions"] for topic in topic_info.values()
+    }
+    topic_label = get_answers(
+        question="Which topic do you want to be quizzed about",
+        alternatives=sorted(topics),
+    )[0]
+
+    questions = topics[topic_label]
     num_questions = min(num_questions, len(questions))
     return random.sample(questions, k=num_questions)
 
@@ -86,4 +95,4 @@ def get_answers(question, alternatives, num_choices=1, hint=None):
         return [labeled_alternatives[answer] for answer in answers]
 
 if __name__ == "__main__":
-    run_quiz()
+    run_quizz()

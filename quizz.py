@@ -1,6 +1,6 @@
+import pathlib
 import random
 from string import ascii_lowercase
-import pathlib
 try:
     import tomllib
 except ModuleNotFoundError:
@@ -9,28 +9,22 @@ except ModuleNotFoundError:
 NUM_QUESTIONS_PER_QUIZ = 5
 QUESTIONS_PATH = pathlib.Path(__file__).parent / "questions.toml"
 
-
-def run_quizz():
-    # Preprocess
+def run_quiz():
     questions = prepare_questions(
         QUESTIONS_PATH, num_questions=NUM_QUESTIONS_PER_QUIZ
     )
 
-    # Process (main loop)
     num_correct = 0
     for num, question in enumerate(questions, start=1):
         print(f"\nQuestion {num}:")
         num_correct += ask_question(question)
 
-    # Postprocess
     print(f"\nYou got {num_correct} correct out of {num} questions")
-
 
 def prepare_questions(path, num_questions):
     questions = tomllib.loads(path.read_text())["questions"]
     num_questions = min(num_questions, len(questions))
     return random.sample(questions, k=num_questions)
-
 
 def ask_question(question):
     correct_answers = question["answers"]
@@ -43,29 +37,32 @@ def ask_question(question):
         num_choices=len(correct_answers),
         hint=question.get("hint"),
     )
-    if set(answers) == set(correct_answers):
+    if correct := (set(answers) == set(correct_answers)):
         print("⭐ Correct! ⭐")
-        return 1
     else:
         is_or_are = " is" if len(correct_answers) == 1 else "s are"
         print("\n- ".join([f"No, the answer{is_or_are}:"] + correct_answers))
-        return 0
 
+    if "explanation" in question:
+        print(f"\nEXPLANATION:\n{question['explanation']}")
+
+    return 1 if correct else 0
 
 def get_answers(question, alternatives, num_choices=1, hint=None):
     print(f"{question}?")
     labeled_alternatives = dict(zip(ascii_lowercase, alternatives))
     if hint:
         labeled_alternatives["?"] = "Hint"
+
     for label, alternative in labeled_alternatives.items():
-        print(f"   {label})  {alternative}")
+        print(f"  {label}) {alternative}")
 
     while True:
         plural_s = "" if num_choices == 1 else f"s (choose {num_choices})"
-        answer = input(f"\nChoice{plural_s}?")
+        answer = input(f"\nChoice{plural_s}? ")
         answers = set(answer.replace(",", " ").split())
 
-        # Handel hints
+        # Handle hints
         if hint and "?" in answers:
             print(f"\nHINT: {hint}")
             continue
@@ -73,11 +70,11 @@ def get_answers(question, alternatives, num_choices=1, hint=None):
         # Handle invalid answers
         if len(answers) != num_choices:
             plural_s = "" if num_choices == 1 else "s, separated by comma"
-            print(f"Please answer {num_choices} alternatives{plural_s}")
+            print(f"Please answer {num_choices} alternative{plural_s}")
             continue
 
         if any(
-                (invalid := answer) not in labeled_alternatives
+            (invalid := answer) not in labeled_alternatives
             for answer in answers
         ):
             print(
@@ -88,6 +85,5 @@ def get_answers(question, alternatives, num_choices=1, hint=None):
 
         return [labeled_alternatives[answer] for answer in answers]
 
-
 if __name__ == "__main__":
-    run_quizz()
+    run_quiz()

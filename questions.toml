@@ -1,30 +1,36 @@
 [[questions]]
 
 question = "What was Meta Platforms Inc formerly known as"
-answer = "Facebook"
+answers = ["Facebook"]
 alternatives = ["Google", "Apple", "Dell"]
 
 [[questions]]
 
 question = "Which English city is known as the Steel City"
-answer = "Sheffield"
+answers = ["Sheffield"]
 alternatives = ["London", "Manchester", "Liverpool"]
 
 [[questions]]
 
 question = "Which former British colony was given back to China in 1997"
-answer = "Hong Kong"
+answers = ["Hong Kong"]
 alternatives = ["Shanghai", "Beijing", "Wuhan"]
 
 [[questions]]
 
 question = "The logo for luxury car maker Porsche features which animal"
-answer = "Horse"
+answers = ["Horse"]
 alternatives = ["Goat", "Eagle", "Snake"]
 
 [[questions]]
 
 question = "Which element is said to keep bones strong"
-answer = "Calcium"
+answer = ["Calcium"]
 alternatives = ["Chromium", "Titanium", "Helium"]
 
+[[questions]]
+
+question = "What elements water consists of"
+answers = ["Helium", "Oxygen"]
+alternatives = ["Chromium", "Titanium", "Calcium"]
+hint = "Water formula is H20"
